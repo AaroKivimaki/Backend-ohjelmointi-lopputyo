@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from sqlmodel import SQLModel
+from .routers import pelaaja_router, event_router
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from .db.database import create_db_and_tables
@@ -8,6 +8,7 @@ from .db.database import create_db_and_tables
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     yield create_db_and_tables()
+
 
 app = FastAPI(lifespan=lifespan)
 
@@ -18,3 +19,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(pelaaja_router.router)
+# app.include_router(event_router.router)
