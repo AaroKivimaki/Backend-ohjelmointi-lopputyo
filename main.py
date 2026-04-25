@@ -21,4 +21,4 @@ app.add_middleware(
 )
 
 app.include_router(pelaaja_router.router)
-# app.include_router(event_router.router)
+app.include_router(event_router.router)

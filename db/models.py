@@ -3,7 +3,6 @@ from sqlmodel import SQLModel, Field
 
 class PelaajaBase(SQLModel):
     name: str
-    events: str
 
 
 class PelaajaIn(PelaajaBase):
@@ -22,7 +21,7 @@ class EventBase(SQLModel):
 
 
 class EventDb(EventBase, table=True):
-    player_id: int = Field(default=None, primary_key=True)
+    id: int = Field(default=None, primary_key=True)
 
 
 class EventIn(EventBase):
