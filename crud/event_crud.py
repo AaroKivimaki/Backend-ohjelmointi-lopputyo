@@ -1,21 +1,13 @@
-from ..db.models import EventDb, EventIn
-
-events = [
-    {
-        "id": 0,
-        "type": "level_started",
-        "detail": "level_1212_001",
-        "timestamp": "2023-01-13 12:01:22",
-        "player_id": 1,
-    }
-]
-
-# def create_event(manu_in: ManufacturerIn):
-#     new_id = max([s["id"] for s in manus]) + 1
-#     manu = ManufacturerDb(id=new_id, **manu_in.model_dump())
-#     manus.append(manu.model_dump())
-#     return manu
+from sqlmodel import Session, select
+from fastapi import HTTPException
+from ..db.models import EventDb
 
 
-def get_events():
-    return events
+def get_events(session: Session, level_type: str):
+    if level_type:
+        if level_type == "level_started" or level_type == "level_solved":
+            statement = select(EventDb).where(EventDb.type == level_type)
+            return session.exec(statement).all()
+        else:
+            raise HTTPException(status_code=400)
+    return session.exec(select(EventDb)).all()
