@@ -2,4 +2,4 @@ Ohjelmassa ei ole käytetty tekoälyä! Suurin osa koodista on muokattu tunneill
 
 Ohjelman mukana requirements.txt, jossa tarvittavat kirjastot
 
-Ohjelma käynnistyy kirjoittamalla ohjelman ruudessa: fastapi dev
+Ohjelma käynnistyy kirjoittamalla ohjelman rootissa: fastapi dev
